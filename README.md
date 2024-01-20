@@ -1,10 +1,9 @@
-# Go Gin Example [![rcard](https://goreportcard.com/badge/github.com/EDDYCJY/go-gin-example)](https://goreportcard.com/report/github.com/EDDYCJY/go-gin-example) [![GoDoc](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)](https://godoc.org/github.com/EDDYCJY/go-gin-example) [![License](http://img.shields.io/badge/license-mit-blue.svg?style=flat-square)](https://raw.githubusercontent.com/EDDYCJY/go-gin-example/master/LICENSE)
-
+# Go Gin Base
 An example of gin contains many useful features
 
 ## Installation
 ```
-go get github.com/EDDYCJY/go-gin-example
+go get github.com/copoet/gin-base
 ```
 
 ## How to run
@@ -14,15 +13,13 @@ go get github.com/EDDYCJY/go-gin-example
 - Mysql
 - Redis
 
-### Ready
-
-Create a **blog database** and import [SQL](https://github.com/EDDYCJY/go-gin-example/blob/master/docs/sql/blog.sql)
-
 ### Conf
-
 You should modify `conf/app.ini`
 
 ```
+[app]
+Port = 8080
+
 [database]
 Type = mysql
 User = root
@@ -37,14 +34,17 @@ Password =
 MaxIdle = 30
 MaxActive = 30
 IdleTimeout = 200
-...
+
 ```
 
 ### Run
 ```
-$ cd $GOPATH/src/go-gin-example
+$ cd $GOPATH/src/gin-base
 
-$ go run main.go 
+$ go run ./cmd/main.go 
 ```
-
-Project information and existing API
+### Swagger
+#### 新增api后需要执行下面命令 可生成swagger文档
+```
+swag init 
+```
