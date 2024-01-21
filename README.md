@@ -14,12 +14,13 @@ go get github.com/copoet/gin-base
 - Redis
 
 ### Conf
-You should modify `conf/app.ini`
+You should set  `conf/app.ini` 
 
 ```
 [app]
 Port = 8080
-
+PrefixUrl = http://127.0.0.1:8091
+RunMode = debug
 [database]
 Type = mysql
 User = root

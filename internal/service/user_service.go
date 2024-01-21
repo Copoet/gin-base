@@ -1,10 +1,9 @@
 package services
 
 import (
-"gin-base/internal/model"
-"errors"
+	"errors"
+	"gin-base/internal/model"
 )
-
 
 func CheckUser(user *model.User) error {
 	if user.Name == "" {

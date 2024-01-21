@@ -11,12 +11,14 @@ type AppConfig struct {
 	Database DatabaseConfig
 }
 
-//应用配置信息
+// 应用配置信息
 type ApplicationConfig struct {
-	Port string
+	Port      string
+	PrefixUrl string
+	RunMode   string
 }
 
-//数据库配置信息
+// 数据库配置信息
 type DatabaseConfig struct {
 	Type     string
 	User     string
