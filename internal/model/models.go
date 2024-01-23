@@ -6,6 +6,7 @@ import (
 )
 
 type BaseModel struct {
+	gorm.Model
 	ID        uint `gorm:"primarykey"`
 	CreatedAt time.Time
 	UpdatedAt time.Time
@@ -25,4 +26,3 @@ func (base *BaseModel) Update(db *gorm.DB, values interface{}) error {
 func (base *BaseModel) Delete(db *gorm.DB) error {
 	return db.Delete(base).Error
 }
-
