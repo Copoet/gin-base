@@ -13,7 +13,7 @@ type UserController struct {
 }
 
 func (u *UserController) GetList(c *gin.Context) {
-	var users []model.User
+	var users []model.Users
 	var count int64
 
 	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))
@@ -22,7 +22,7 @@ func (u *UserController) GetList(c *gin.Context) {
 
 	offset := (page - 1) * pageSize
 
-	query := database.DB.Model(&model.User{})
+	query := database.DB.Model(&model.Users{})
 	if name != "" {
 		query = query.Where("username LIKE ?", "%"+name+"%")
 	}
