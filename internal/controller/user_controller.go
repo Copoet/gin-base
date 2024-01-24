@@ -17,16 +17,13 @@ func (u *UserController) GetList(c *gin.Context) {
 	pageSize, _ := strconv.Atoi(c.DefaultQuery("page_size", "10"))
 	name := c.Query("name")
 
-	users, count, err := u.UserService.GetUsers(page, pageSize, name)
+	data, err := u.UserService.GetUsers(page, pageSize, name)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"data":      users,
-		"total":     count,
-		"page":      page,
-		"page_size": pageSize,
+		"data": data,
 	})
 }

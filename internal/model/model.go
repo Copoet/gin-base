@@ -1,4 +1,4 @@
-package database
+package model
 
 import (
 	"fmt"
@@ -12,6 +12,11 @@ import (
 )
 
 var DB *gorm.DB
+
+type BaseModel struct {
+	ID        int `gorm:"primary_key" json:"id"`
+	CreatedAt int `json:"created_at"`
+}
 
 func Init() {
 	//sql日志

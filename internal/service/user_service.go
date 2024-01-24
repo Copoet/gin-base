@@ -1,23 +1,24 @@
 package services
 
 import (
-	"gin-base/internal/database"
 	"gin-base/internal/model"
 )
 
 type UserService struct {
 }
 
-func (u *UserService) GetUsers(page int, pageSize int, name string) ([]model.Users, int64, error) {
-	var users []model.Users
-	var count int64
+type UserListData struct {
+	List  []*model.Users `json:"list"`
+	Total int64          `json:"total"`
+}
 
-	offset := (page - 1) * pageSize
-	query := database.DB.Model(&model.Users{})
-	if name != "" {
-		query = query.Where("username LIKE ?", "%"+name+"%")
+func (u *UserService) GetUsers(page int, pageSize int, name string) (*UserListData, error) {
+	users, count, err := model.GetUserList(page, pageSize, name)
+	if err != nil {
+		return nil, err
 	}
-
-	err := query.Count(&count).Limit(pageSize).Offset(offset).Find(&users).Error
-	return users, count, err
+	return &UserListData{
+		List:  users,
+		Total: count,
+	}, nil
 }
