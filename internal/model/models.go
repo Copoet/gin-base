@@ -2,13 +2,9 @@ package model
 
 import (
 	"gorm.io/gorm"
-	"time"
 )
 
 type BaseModel struct {
-	ID        uint `gorm:"primarykey"`
-	CreatedAt time.Time
-	UpdatedAt time.Time
 }
 
 // Create 在数据库中创建记录

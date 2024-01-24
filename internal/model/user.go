@@ -3,7 +3,9 @@ package model
 // User 用户模型
 type Users struct {
 	BaseModel
-	Username string
-	Sex      string
-	Age      int
+	ID       int    `json:"id"`
+	Email    string `json:"email"`
+	Username string `json:"username"`
+	Phone    string `json:"phone"`
+	IsVip    int    `json:"is_vip"`
 }

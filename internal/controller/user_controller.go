@@ -1,35 +1,29 @@
 package controllers
 
 import (
-	"gin-base/internal/database"
-	"gin-base/internal/model"
+	services "gin-base/internal/service"
 	"github.com/gin-gonic/gin"
-	"gorm.io/gorm"
+	"net/http"
 	"strconv"
 )
 
 type UserController struct {
-	DB *gorm.DB //
+	UserService *services.UserService
 }
 
 func (u *UserController) GetList(c *gin.Context) {
-	var users []model.Users
-	var count int64
 
 	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))
 	pageSize, _ := strconv.Atoi(c.DefaultQuery("page_size", "10"))
 	name := c.Query("name")
 
-	offset := (page - 1) * pageSize
-
-	query := database.DB.Model(&model.Users{})
-	if name != "" {
-		query = query.Where("username LIKE ?", "%"+name+"%")
+	users, count, err := u.UserService.GetUsers(page, pageSize, name)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
 	}
 
-	query.Count(&count).Limit(pageSize).Offset(offset).Find(&users)
-
-	c.JSON(200, gin.H{
+	c.JSON(http.StatusOK, gin.H{
 		"data":      users,
 		"total":     count,
 		"page":      page,
