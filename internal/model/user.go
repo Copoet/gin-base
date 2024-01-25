@@ -13,13 +13,16 @@ type Users struct {
 func GetUserList(page int, pageSize int, name string) ([]*Users, int64, error) {
 	var users []*Users
 	var count int64
-
-	offset := (page - 1) * pageSize
+	//初始化查询
 	query := DB.Model(&Users{})
+
+	//分页
+	offset := (page - 1) * pageSize
 
 	if name != "" {
 		query = query.Where("username LIKE ?", "%"+name+"%")
 	}
 	err := query.Count(&count).Limit(pageSize).Offset(offset).Find(&users).Error
+
 	return users, count, err
 }
