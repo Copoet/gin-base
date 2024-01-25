@@ -29,7 +29,7 @@ type ManagerQuery struct {
 }
 
 // 构造可复用的查询条件
-func buildQuery(db *gorm.DB, query ManagerQuery) *gorm.DB {
+func buildManagerQuery(db *gorm.DB, query ManagerQuery) *gorm.DB {
 	if query.Keyword != nil {
 		db = db.Where("name LIKE ?", "%"+*query.Keyword+"%")
 	}
@@ -49,7 +49,7 @@ func buildQuery(db *gorm.DB, query ManagerQuery) *gorm.DB {
 func GetManagerList(query ManagerQuery, page int, pageSize int) (result map[string]interface{}, err error) {
 	var managers []*Manager
 	var total int64
-	dbQuery := buildQuery(DB.Model(&Manager{}), query)
+	dbQuery := buildManagerQuery(DB.Model(&Manager{}), query)
 
 	//统计条数
 	err = dbQuery.Count(&total).Error
