@@ -11,6 +11,6 @@ func SetupRouter(router *gin.Engine) {
 	//router.POST("/users", userController.Create)
 	//测试中间价
 	router.Use(middleware.LoggerMiddleware())
-	//路由
+
 	router.GET("/users/list", userController.GetList)
 }
