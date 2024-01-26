@@ -16,9 +16,7 @@ type AuthManager struct {
 	UpIp          string    `json:"up_ip"`
 	Remark        string    `json:"remark"`
 	IsDelete      int       `json:"is_delete"`
-	CreateAt      time.Time `json:"create_at"`
 	LastAt        time.Time `json:"last_at"`
-	UpdateAt      time.Time `json:"update_at"`
 }
 
 // 指定表名
