@@ -2,12 +2,13 @@ package controllers
 
 import (
 	services "gin-base/internal/service"
+	"gin-base/pkg/util"
 	"github.com/gin-gonic/gin"
-	"net/http"
 	"strconv"
 )
 
 type UserController struct {
+	BaseController
 	UserService *services.UserService
 }
 
@@ -29,11 +30,7 @@ func (u *UserController) GetList(c *gin.Context) {
 
 	data, err := u.UserService.GetUsers(page, pageSize, name)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
+		u.ReturnFail(c, util.PublicError, nil)
 	}
-
-	c.JSON(http.StatusOK, gin.H{
-		"data": data,
-	})
+	u.ReturnSuccess(c, util.PublicSuccess, data)
 }
