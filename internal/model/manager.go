@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-type Manager struct {
+type AuthManager struct {
 	BaseModel
 	ID            int       `json:"id"`
 	Status        int       `json:"status"`
@@ -19,6 +19,11 @@ type Manager struct {
 	CreateAt      time.Time `json:"create_at"`
 	LastAt        time.Time `json:"last_at"`
 	UpdateAt      time.Time `json:"update_at"`
+}
+
+// 指定表名
+func (AuthManager) TableName() string {
+	return "auth_manager"
 }
 
 type ManagerQuery struct {
@@ -47,9 +52,9 @@ func buildManagerQuery(db *gorm.DB, query ManagerQuery) *gorm.DB {
 
 // 根据指定条件获取列表
 func GetManagerList(query ManagerQuery, page int, pageSize int) (result map[string]interface{}, err error) {
-	var managers []*Manager
+	var managers []*AuthManager
 	var total int64
-	dbQuery := buildManagerQuery(DB.Model(&Manager{}), query)
+	dbQuery := buildManagerQuery(DB.Model(&AuthManager{}), query)
 
 	//统计条数
 	err = dbQuery.Count(&total).Error
