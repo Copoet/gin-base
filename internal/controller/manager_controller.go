@@ -13,6 +13,12 @@ type MangerController struct {
 	ManagerService *services.ManagerService
 }
 
+// @Summary Get Manager List
+// @Produce  json
+// @Param keyword query string false "keyword"
+// @Param page query int false "page"
+// @Param page_size query int false "page_size"
+// @Router /manager/list [get]
 func (m *MangerController) GetManagerList(c *gin.Context) {
 	// 初始化查询条件
 	var query model.ManagerQuery

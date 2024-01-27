@@ -17,6 +17,12 @@ func init() {
 	model.Init()
 }
 
+// @title gin-base api doc
+// @version v-0.0.1
+// @description This is a sample Server pets
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Authorization
 func main() {
 	// 强制日志颜色化
 	gin.ForceConsoleColor()

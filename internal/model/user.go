@@ -23,12 +23,18 @@ type Users struct {
 	RegTime  time.Time `json:"reg_time"`
 }
 
+// UserQuery 用户查询条件
 type UserQuery struct {
 	Keyword  *string
 	IsDelete *int
 	Phone    *string
 	Status   *int
 	Email    *string
+}
+
+// 指定表名
+func (Users) TableName() string {
+	return "users"
 }
 
 // 构造可复用的查询条件
@@ -51,6 +57,7 @@ func buildUserQuery(db *gorm.DB, query UserQuery) *gorm.DB {
 	return db
 }
 
+// 根据指定条件获取列表
 func GetUserList(query UserQuery, page int, pageSize int) (result map[string]interface{}, err error) {
 	var users []*Users
 	var total int64

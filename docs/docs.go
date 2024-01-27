@@ -14,17 +14,83 @@ const docTemplate = `{
     },
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
-    "paths": {}
+    "paths": {
+        "/manager/list": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Get Manager List",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "keyword",
+                        "name": "keyword",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page_size",
+                        "name": "page_size",
+                        "in": "query"
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/users/list": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Get User List",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "name",
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page_size",
+                        "name": "page_size",
+                        "in": "query"
+                    }
+                ],
+                "responses": {}
+            }
+        }
+    },
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "",
+	Version:          "v-0.0.1",
 	Host:             "",
 	BasePath:         "",
 	Schemes:          []string{},
-	Title:            "",
-	Description:      "",
+	Title:            "gin-base api doc",
+	Description:      "This is a sample Server pets",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

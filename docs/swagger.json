@@ -1,7 +1,76 @@
 {
     "swagger": "2.0",
     "info": {
-        "contact": {}
+        "description": "This is a sample Server pets",
+        "title": "gin-base api doc",
+        "contact": {},
+        "version": "v-0.0.1"
     },
-    "paths": {}
+    "paths": {
+        "/manager/list": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Get Manager List",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "keyword",
+                        "name": "keyword",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page_size",
+                        "name": "page_size",
+                        "in": "query"
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/users/list": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Get User List",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "name",
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page_size",
+                        "name": "page_size",
+                        "in": "query"
+                    }
+                ],
+                "responses": {}
+            }
+        }
+    },
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
 }

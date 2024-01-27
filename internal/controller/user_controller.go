@@ -12,16 +12,12 @@ type UserController struct {
 	UserService *services.UserService
 }
 
-// GetList 方法用于获取用户列表
-// @Summary 获取用户列表
-// @Description 根据分页和名字参数获取用户列表
-// @Produce json
-// @Param page query int false "页码"
-// @Param page_size query int false "分页大小"
-// @Param name query string false "用户名"
-// @Success 200 {object} gin.H
-// @Failure 500 {object} gin.H
-// @Router /users [get]
+// @Summary Get User List
+// @Produce  json
+// @Param name query string false "name"
+// @Param page query int false "page"
+// @Param page_size query int false "page_size"
+// @Router /users/list [get]
 func (u *UserController) GetList(c *gin.Context) {
 
 	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))
