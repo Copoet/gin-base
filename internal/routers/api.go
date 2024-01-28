@@ -13,22 +13,22 @@ func SetupRouter(router *gin.Engine) {
 
 	//测试中间价
 	router.Use(middleware.LoggerMiddleware())
-	// login
-	router.Group("/auth")
+	// login & logout
+	auth := router.Group("/auth")
 	{
-		router.POST("/login", authController.Login)
-		router.GET("/logout", authController.Logout)
+		auth.POST("/login", authController.Login)
+		auth.GET("/logout", authController.Logout)
 	}
 
 	//users group
-	router.Group("/users")
+	users := router.Group("/users")
 	{
-		router.GET("/list", userController.GetList)
+		users.GET("/list", userController.GetList)
 	}
 	// manager group
-	router.Group("/manager")
+	manager := router.Group("/manager")
 	{
-		router.GET("/manager/list", managerController.GetManagerList)
+		manager.GET("/list", managerController.GetManagerList)
 	}
 
 }
