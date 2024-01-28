@@ -9,11 +9,26 @@ import (
 func SetupRouter(router *gin.Engine) {
 	userController := new(controllers.UserController)
 	managerController := new(controllers.MangerController)
+	authController := new(controllers.AuthController)
 
 	//测试中间价
 	router.Use(middleware.LoggerMiddleware())
-	//router.GET("/users", userController.GetList)
-	router.GET("/users/list", userController.GetList)
+	// login
+	router.Group("/auth")
+	{
+		router.POST("/login", authController.Login)
+		router.GET("/logout", authController.Logout)
+	}
 
-	router.GET("/manager/list", managerController.GetManagerList)
+	//users group
+	router.Group("/users")
+	{
+		router.GET("/list", userController.GetList)
+	}
+	// manager group
+	router.Group("/manager")
+	{
+		router.GET("/manager/list", managerController.GetManagerList)
+	}
+
 }
