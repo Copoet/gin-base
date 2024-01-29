@@ -21,7 +21,7 @@ func SetupRouter(router *gin.Engine) {
 	}
 
 	//users group
-	users := router.Group("/users")
+	users := router.Group("/users", middleware.JwtMiddleware())
 	{
 		users.GET("/list", userController.GetList)
 	}

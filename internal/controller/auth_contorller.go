@@ -46,7 +46,7 @@ func (a *AuthController) Login(c *gin.Context) {
 		return
 	}
 	// 3.生成token
-	token, err := util.GenerateToken(authInfo.Name, authInfo.Password)
+	token, err := util.GenerateToken(authInfo.Name)
 	if err != nil {
 		a.ReturnFail(c, util.PublicError, err)
 		return
@@ -60,15 +60,5 @@ func (a *AuthController) Login(c *gin.Context) {
 // @return
 // @Router /auth/logout [post]
 func (a *AuthController) Logout(c *gin.Context) {
-	// 获取token
-	tokenString := c.GetHeader("Authorization")
-	// 校验token
-	if !util.ValidTokenExpress(tokenString) {
-		a.ReturnFail(c, util.PublicAuthError, nil)
-		return
-	}
-	// 删除token
-	util.DeleteToken(tokenString)
 	a.ReturnSuccess(c, util.PublicSuccess, nil)
-
 }
