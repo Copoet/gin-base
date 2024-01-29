@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	services "gin-base/internal/service"
 	"gin-base/pkg/util"
 	"github.com/gin-gonic/gin"
@@ -23,7 +24,7 @@ func (u *UserController) GetList(c *gin.Context) {
 	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))
 	pageSize, _ := strconv.Atoi(c.DefaultQuery("page_size", "10"))
 	name := c.Query("name")
-
+	fmt.Println(util.HashPassword("123456"))
 	data, err := u.UserService.GetUsers(page, pageSize, name)
 	if err != nil {
 		u.ReturnFail(c, util.PublicError, nil)

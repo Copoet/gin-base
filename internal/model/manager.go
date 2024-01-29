@@ -1,6 +1,7 @@
 package model
 
 import (
+	"fmt"
 	"gorm.io/gorm"
 	"time"
 )
@@ -69,4 +70,16 @@ func GetManagerList(query ManagerQuery, page int, pageSize int) (result map[stri
 		"list":  managers,
 	}
 	return result, nil
+}
+
+// 根据指定条件获取单条信息
+func GetManagerInfo(query ManagerQuery) (manager *AuthManager, err error) {
+	dbQuery := buildManagerQuery(DB.Model(&AuthManager{}), query)
+	err = dbQuery.First(&manager).Error
+	fmt.Println(err)
+	if err != nil {
+		return nil, err
+	}
+	return manager, nil
+
 }
