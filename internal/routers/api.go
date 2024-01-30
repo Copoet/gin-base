@@ -26,9 +26,12 @@ func SetupRouter(router *gin.Engine) {
 		users.GET("/list", userController.GetList)
 	}
 	// manager group
-	manager := router.Group("/manager", middleware.JwtMiddleware())
+	manager := router.Group("/manager")
 	{
 		manager.GET("/list", managerController.GetManagerList)
+		manager.POST("/add", managerController.AddManager)
+		manager.PUT("/update/:id", managerController.UpdateManager)
+		manager.DELETE("/delete/:id", managerController.DeleteManager)
 	}
 
 }

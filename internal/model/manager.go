@@ -3,21 +3,20 @@ package model
 import (
 	"fmt"
 	"gorm.io/gorm"
-	"time"
 )
 
 type AuthManager struct {
 	BaseModel
-	ID            int       `json:"id"`
-	Status        int       `json:"status"`
-	Uuid          string    `json:"uuid"`
-	Name          string    `json:"name"`
-	Password      string    `json:"password"`
-	RememberToken string    `json:"remember_token"`
-	UpIp          string    `json:"up_ip"`
-	Remark        string    `json:"remark"`
-	IsDelete      int       `json:"is_delete"`
-	LastAt        time.Time `json:"last_at"`
+	ID            int    `json:"id"`
+	Status        int    `json:"status"`
+	Uuid          string `json:"uuid"`
+	Name          string `json:"name"`
+	Password      string `json:"password"`
+	RememberToken string `json:"remember_token"`
+	UpIp          string `json:"up_ip"`
+	Remark        string `json:"remark"`
+	IsDelete      int    `json:"is_delete"`
+	LastTime      string `json:"last_at"`
 }
 
 // 指定表名
@@ -81,5 +80,33 @@ func GetManagerInfo(query ManagerQuery) (manager *AuthManager, err error) {
 		return nil, err
 	}
 	return manager, nil
+
+}
+
+// 添加管理员
+func AddManager(manager *AuthManager) (id int, err error) {
+	result := DB.Create(manager)
+	if result.Error != nil {
+		return 0, result.Error
+	}
+	return int(manager.ID), nil
+}
+
+// 更新管理员
+func UpdateManager(id int, manager *AuthManager) (rid int, err error) {
+	result := DB.Model(&AuthManager{}).Where("id = ?", id).Updates(manager)
+	if result.Error != nil {
+		return 0, result.Error
+	}
+	return rid, nil
+}
+
+// 删除管理员
+func DeleteManager(id int) (rid int, err error) {
+	result := DB.Model(&AuthManager{}).Where("id = ?", id).Update("is_delete", 1)
+	if result.Error != nil {
+		return 0, result.Error
+	}
+	return rid, nil
 
 }

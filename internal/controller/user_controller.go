@@ -13,7 +13,7 @@ type UserController struct {
 	UserService *services.UserService
 }
 
-// @Summary Get User List
+// @Summary 用户列表
 // @Tags User
 // @Produce  json
 // @Param name query string false "name"

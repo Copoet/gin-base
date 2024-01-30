@@ -55,6 +55,68 @@ const docTemplate = `{
                 "responses": {}
             }
         },
+        "/manager/add": {
+            "post": {
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Manage"
+                ],
+                "summary": "添加管理员",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "用户名",
+                        "name": "name",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "密码",
+                        "name": "password",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "状态",
+                        "name": "status",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/manager/delete": {
+            "delete": {
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Manage"
+                ],
+                "summary": "删除管理员",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Manager ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
         "/manager/list": {
             "get": {
                 "produces": [
@@ -63,7 +125,7 @@ const docTemplate = `{
                 "tags": [
                     "Manage"
                 ],
-                "summary": "Get Manager List",
+                "summary": "管理员列表",
                 "parameters": [
                     {
                         "type": "string",
@@ -87,6 +149,51 @@ const docTemplate = `{
                 "responses": {}
             }
         },
+        "/manager/update": {
+            "put": {
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Manage"
+                ],
+                "summary": "更新管理员",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Manager ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用户名",
+                        "name": "name",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "密码",
+                        "name": "password",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "状态",
+                        "name": "status",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
         "/users/list": {
             "get": {
                 "produces": [
@@ -95,7 +202,7 @@ const docTemplate = `{
                 "tags": [
                     "User"
                 ],
-                "summary": "Get User List",
+                "summary": "用户列表",
                 "parameters": [
                     {
                         "type": "string",
