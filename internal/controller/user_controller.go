@@ -14,6 +14,7 @@ type UserController struct {
 }
 
 // @Summary Get User List
+// @Tags User
 // @Produce  json
 // @Param name query string false "name"
 // @Param page query int false "page"

@@ -14,6 +14,7 @@ type MangerController struct {
 }
 
 // @Summary Get Manager List
+// @Tags Manage
 // @Produce  json
 // @Param keyword query string false "keyword"
 // @Param page query int false "page"

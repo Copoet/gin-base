@@ -13,13 +13,14 @@ type AuthController struct {
 }
 
 // @Summary 登陆
-// @Accept  json
+// @Tags Auth
+// @Accept  x-www-form-urlencoded
 // @Produce  json
-// @Param username formData string true "Username"
-// @Param password formData string true "Password"
-// @Param c body object true "Context"
+// @Param   username  formData  string  true  "用户名"
+// @Param   password  formData  string  true  "密码"
 // @Router /auth/login [post]
 func (a *AuthController) Login(c *gin.Context) {
+
 	username := c.PostForm("username")
 	password := c.PostForm("password")
 
@@ -56,9 +57,9 @@ func (a *AuthController) Login(c *gin.Context) {
 }
 
 // @Summary 退出登陆
-// @param c
+// @Tags Auth
 // @return
-// @Router /auth/logout [post]
+// @Router /auth/logout [get]
 func (a *AuthController) Logout(c *gin.Context) {
 	a.ReturnSuccess(c, util.PublicSuccess, nil)
 }
