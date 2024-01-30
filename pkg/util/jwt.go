@@ -2,6 +2,7 @@ package util
 
 import (
 	"errors"
+	"gin-base/config"
 	"github.com/golang-jwt/jwt/v4"
 	"time"
 )
@@ -11,8 +12,9 @@ type Claims struct {
 	jwt.RegisteredClaims
 }
 
-var SecretKey = []byte("your_secret_key")
+var SecretKey = []byte(config.Config.JwtConfig.Secret)
 
+// 生成token
 func GenerateToken(username string) (string, error) {
 	expirationTime := time.Now().Add(2 * time.Hour)
 	claims := &Claims{
@@ -25,6 +27,7 @@ func GenerateToken(username string) (string, error) {
 	return token.SignedString(SecretKey)
 }
 
+// 验证token
 func VerifyToken(tokenString string) (*Claims, error) {
 	token, err := jwt.ParseWithClaims(tokenString, &Claims{}, func(token *jwt.Token) (interface{}, error) {
 		return SecretKey, nil
@@ -38,6 +41,7 @@ func VerifyToken(tokenString string) (*Claims, error) {
 	return nil, errors.New("invalid token")
 }
 
+// 判断token是否过期
 func IsTokenValid(tokenString string) bool {
 	_, err := jwt.ParseWithClaims(tokenString, &Claims{}, func(token *jwt.Token) (interface{}, error) {
 		return SecretKey, nil

@@ -45,6 +45,10 @@ MaxIdle = 30
 MaxActive = 30
 IdleTimeout = 200
 
+[jwt]
+SecretKey = ginKey
+Expire=2
+
 ```
 ## How to run
 
