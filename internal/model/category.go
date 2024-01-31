@@ -20,7 +20,8 @@ func (Category) TableName() string {
 }
 
 // 查询参数
-type categoryQuery struct {
+type CategoryQuery struct {
+	Id          *int
 	Keyword     *string
 	SortName    *string
 	ParentID    *int
@@ -29,7 +30,7 @@ type categoryQuery struct {
 }
 
 // 构造查询参数
-func buildCategoryQuery(db *gorm.DB, query categoryQuery) *gorm.DB {
+func buildCategoryQuery(db *gorm.DB, query CategoryQuery) *gorm.DB {
 	if query.Keyword != nil {
 		db = db.Where("keyword LIKE ?", "%"+*query.Keyword+"%")
 	}
@@ -49,7 +50,7 @@ func buildCategoryQuery(db *gorm.DB, query categoryQuery) *gorm.DB {
 }
 
 // 根据指定条件获取列表
-func GetCategoryList(query categoryQuery, page int, pageSize int) (map[string]interface{}, error) {
+func GetCategoryList(query CategoryQuery, page int, pageSize int) (map[string]interface{}, error) {
 	var categories []*Category
 	var total int64
 	dbQuery := buildCategoryQuery(DB.Model(&Category{}), query)
@@ -70,7 +71,7 @@ func GetCategoryList(query categoryQuery, page int, pageSize int) (map[string]in
 }
 
 // 根据指定条件获取单条信息
-func GetCategoryOne(query categoryQuery) (*Category, error) {
+func GetCategoryOne(query CategoryQuery) (*Category, error) {
 	dbQuery := buildCategoryQuery(DB.Model(&Category{}), query)
 	var category Category
 	err := dbQuery.First(&category).Error
