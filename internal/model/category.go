@@ -1,5 +1,7 @@
 package model
 
+import "gorm.io/gorm"
+
 // Category 文章分类
 type Category struct {
 	BaseModel
@@ -10,4 +12,87 @@ type Category struct {
 	Description string `json:"description"`
 	Status      int    `json:"status"`
 	IsDelete    int    `json:"is_delete"`
+}
+
+// 指定表名
+func (Category) TableName() string {
+	return "article_sort"
+}
+
+// 查询参数
+type categoryQuery struct {
+	Keyword     *string
+	SortName    *string
+	ParentID    *int
+	Status      *int
+	Description *string
+}
+
+// 构造查询参数
+func buildCategoryQuery(db *gorm.DB, query categoryQuery) *gorm.DB {
+	if query.Keyword != nil {
+		db = db.Where("keyword LIKE ?", "%"+*query.Keyword+"%")
+	}
+	if query.SortName != nil {
+		db = db.Where("sort_name = ?", *query.SortName)
+	}
+	if query.ParentID != nil {
+		db = db.Where("parent_id = ?", *query.ParentID)
+	}
+	if query.Status != nil {
+		db = db.Where("status = ?", *query.Status)
+	}
+	if query.Description != nil {
+		db = db.Where("description = ?", *query.Description)
+	}
+	return db
+}
+
+// 根据指定条件获取列表
+func GetCategoryList(query categoryQuery, page int, pageSize int) (map[string]interface{}, error) {
+	var categories []*Category
+	var total int64
+	dbQuery := buildCategoryQuery(DB.Model(&Category{}), query)
+	//统计条数
+	err := dbQuery.Count(&total).Error
+	if err != nil {
+		return nil, err
+	}
+	//查询数据
+	err = dbQuery.Offset((page - 1) * pageSize).Limit(pageSize).Find(&categories).Error
+	if err != nil {
+		return nil, err
+	}
+	return map[string]interface{}{
+		"total": total,
+		"list":  categories,
+	}, nil
+}
+
+// 根据指定条件获取单条信息
+func GetCategoryOne(query categoryQuery) (*Category, error) {
+	dbQuery := buildCategoryQuery(DB.Model(&Category{}), query)
+	var category Category
+	err := dbQuery.First(&category).Error
+	if err != nil {
+		return nil, err
+	}
+	return &category, nil
+}
+
+// 新增
+func AddCategory(category *Category) error {
+	return DB.Create(category).Error
+}
+
+// 更新
+func UpdateCategory(id int, category *Category) error {
+	result := DB.Model(&Category{}).Where("id = ?", id).Updates(category)
+	return result.Error
+}
+
+// 删除
+func DeleteCategory(id int) error {
+	result := DB.Model(&Category{}).Where("id = ?", id).Update("is_delete", 1)
+	return result.Error
 }
