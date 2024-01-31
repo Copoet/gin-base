@@ -141,6 +141,106 @@ paths:
       summary: 退出登陆
       tags:
       - Auth
+  /categories/add:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - description: 分类名称
+        in: formData
+        name: name
+        required: true
+        type: string
+      - description: 状态
+        in: formData
+        name: status
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: 添加分类
+      tags:
+      - Category
+  /categories/delete:
+    delete:
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - description: 分类ID
+        in: formData
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: 删除分类
+      tags:
+      - Category
+  /categories/info:
+    get:
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - description: Category ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: 分类详情
+      tags:
+      - Category
+  /categories/list:
+    get:
+      parameters:
+      - description: keyword
+        in: query
+        name: keyword
+        type: string
+      - description: page
+        in: query
+        name: page
+        type: integer
+      - description: page_size
+        in: query
+        name: page_size
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: 分类列表
+      tags:
+      - Category
+  /categories/update:
+    put:
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - description: 分类ID
+        in: formData
+        name: id
+        required: true
+        type: integer
+      - description: 分类名称
+        in: formData
+        name: name
+        required: true
+        type: string
+      - description: 状态
+        in: formData
+        name: status
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: 更新分类
+      tags:
+      - Category
   /manager/add:
     post:
       consumes:
