@@ -25,6 +25,7 @@ func (Article) TableName() string {
 
 // 查询条件
 type ArticleQuery struct {
+	Id          *int
 	Keyword     *string
 	Tittle      *string
 	Description *string
