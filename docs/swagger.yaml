@@ -4,6 +4,116 @@ info:
   title: gin-base api doc
   version: v-0.0.1
 paths:
+  /articles/add:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - description: 标题
+        in: formData
+        name: title
+        required: true
+        type: string
+      - description: 内容
+        in: formData
+        name: content
+        required: true
+        type: string
+      - description: 状态
+        in: formData
+        name: status
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: 添加文章
+      tags:
+      - Article
+  /articles/delete:
+    delete:
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - description: Article ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: 删除文章
+      tags:
+      - Article
+  /articles/info:
+    get:
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - description: Article ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: 文章详情
+      tags:
+      - Article
+  /articles/list:
+    get:
+      parameters:
+      - description: keyword
+        in: query
+        name: keyword
+        type: string
+      - description: page
+        in: query
+        name: page
+        type: integer
+      - description: page_size
+        in: query
+        name: page_size
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: 文章列表
+      tags:
+      - Article
+  /articles/update:
+    put:
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - description: Article ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 标题
+        in: formData
+        name: title
+        required: true
+        type: string
+      - description: 内容
+        in: formData
+        name: content
+        required: true
+        type: string
+      - description: 状态
+        in: formData
+        name: status
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: 更新文章
+      tags:
+      - Article
   /auth/login:
     post:
       consumes:
