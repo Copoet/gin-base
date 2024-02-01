@@ -1,6 +1,9 @@
 package model
 
-import "gorm.io/gorm"
+import (
+	"gorm.io/gorm"
+	"time"
+)
 
 // Category 文章分类
 type Category struct {
@@ -94,6 +97,7 @@ func UpdateCategory(id int, category *Category) error {
 
 // 删除
 func DeleteCategory(id int) error {
-	result := DB.Model(&Category{}).Where("id = ?", id).Update("is_delete", 1)
+	date := time.Now().Format("2006-01-02 15:04:05")
+	result := DB.Model(&Category{}).Where("id = ?", id).Updates(map[string]interface{}{"is_delete": 1, "update_time": date})
 	return result.Error
 }

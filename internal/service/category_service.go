@@ -1,6 +1,9 @@
 package services
 
-import "gin-base/internal/model"
+import (
+	"gin-base/internal/model"
+	"time"
+)
 
 type CategoryService struct {
 }
@@ -21,7 +24,13 @@ func (s *CategoryService) GetCategoryInfo(query model.CategoryQuery) (*model.Cat
 
 // 新增分类
 func (s *CategoryService) AddCategory(data *model.Category) (id int, err error) {
-
+	date := time.Now().Format("2006-01-02 15:04:05")
+	if data.CreateTime == "" {
+		data.CreateTime = date
+	}
+	if data.UpdateTime == "" {
+		data.UpdateTime = date
+	}
 	err = model.AddCategory(data)
 	if err != nil {
 		return 0, err
@@ -31,6 +40,10 @@ func (s *CategoryService) AddCategory(data *model.Category) (id int, err error) 
 
 // 更新分类
 func (s *CategoryService) UpdateCategory(id int, data *model.Category) (rid int, err error) {
+	date := time.Now().Format("2006-01-02 15:04:05")
+	if data.UpdateTime == "" {
+		data.UpdateTime = date
+	}
 	err = model.UpdateCategory(id, data)
 	if err != nil {
 		return 0, err

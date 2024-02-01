@@ -62,9 +62,15 @@ func (c *CategoryController) AddCategory(ctx *gin.Context) {
 
 	name := ctx.PostForm("name")
 	status, _ := strconv.Atoi(ctx.PostForm("status"))
+	parentId, _ := strconv.Atoi(ctx.PostForm("parent_id"))
+	keywords := ctx.PostForm("keywords")
+	description := ctx.PostForm("description")
 	data, err := c.CategoryService.AddCategory(&model.Category{
-		SortName: name,
-		Status:   status,
+		SortName:    name,
+		Status:      status,
+		ParentID:    parentId,
+		Keywords:    keywords,
+		Description: description,
 	})
 	if err != nil {
 		c.ReturnFail(ctx, util.PublicError, nil)
@@ -85,9 +91,15 @@ func (c *CategoryController) UpdateCategory(ctx *gin.Context) {
 	id, _ := strconv.Atoi(ctx.PostForm("id"))
 	name := ctx.PostForm("name")
 	status, _ := strconv.Atoi(ctx.PostForm("status"))
+	parentId, _ := strconv.Atoi(ctx.PostForm("parent_id"))
+	keywords := ctx.PostForm("keywords")
+	description := ctx.PostForm("description")
 	data, err := c.CategoryService.UpdateCategory(id, &model.Category{
-		SortName: name,
-		Status:   status,
+		SortName:    name,
+		Status:      status,
+		ParentID:    parentId,
+		Keywords:    keywords,
+		Description: description,
 	})
 	if err != nil {
 		c.ReturnFail(ctx, util.PublicError, nil)
