@@ -49,5 +49,6 @@ func SetupRouter(router *gin.Engine) {
 		category.POST("/add", categoryController.AddCategory)
 		category.PUT("/update/:id", categoryController.UpdateCategory)
 		category.DELETE("/delete/:id", categoryController.DeleteCategory)
+		category.GET("/tree", categoryController.GetTree)
 	}
 }

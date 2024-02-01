@@ -101,3 +101,14 @@ func DeleteCategory(id int) error {
 	result := DB.Model(&Category{}).Where("id = ?", id).Updates(map[string]interface{}{"is_delete": 1, "update_time": date})
 	return result.Error
 }
+
+// 获取所有栏目
+func GetAllCategory(query CategoryQuery) (*Category, error) {
+	dbQuery := buildCategoryQuery(DB.Model(&Category{}), query)
+	var category Category
+	err := dbQuery.Where("is_delete = ?", 0).Find(&category).Error
+	if err != nil {
+		return nil, err
+	}
+	return &category, nil
+}

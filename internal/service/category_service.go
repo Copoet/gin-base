@@ -60,3 +60,9 @@ func (s *CategoryService) DeleteCategory(id int) error {
 	}
 	return nil
 }
+
+// 获取所有分类
+func (s *CategoryService) GetAllCategory() (*model.Category, error) {
+	data, err := model.GetAllCategory(model.CategoryQuery{})
+	return data, err
+}
