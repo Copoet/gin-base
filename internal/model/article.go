@@ -1,6 +1,9 @@
 package model
 
-import "gorm.io/gorm"
+import (
+	"gorm.io/gorm"
+	"time"
+)
 
 type Article struct {
 	BaseModel
@@ -98,7 +101,8 @@ func UpdateArticle(id int, article *Article) (rid int, err error) {
 
 // 删除
 func DeleteArticle(id int) (rid int, err error) {
-	result := DB.Model(&Article{}).Where("id = ?", id).Update("is_delete", 1)
+	date := time.Now().Format("2006-01-02 15:04:05")
+	result := DB.Model(&Article{}).Where("id = ?", id).Updates(map[string]interface{}{"is_delete": 1, "update_time": date})
 	if result.Error != nil {
 		return 0, result.Error
 	}

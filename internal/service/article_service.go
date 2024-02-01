@@ -39,6 +39,10 @@ func (s *ArticleService) AddArticle(data *model.Article) (id int, err error) {
 // 更新文章信息
 func (s *ArticleService) UpdateArticle(id int, data *model.Article) (rid int, err error) {
 	id, err = model.UpdateArticle(id, data)
+	date := time.Now().Format("2006-01-02 15:04:05")
+	if data.UpdateTime == "" {
+		data.UpdateTime = date
+	}
 	if err != nil {
 		return 0, err
 	}

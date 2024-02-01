@@ -45,10 +45,25 @@ func (a *ArticleController) AddArticle(c *gin.Context) {
 	title := c.PostForm("title")
 	content := c.PostForm("content")
 	status, _ := strconv.Atoi(c.PostForm("status"))
+	keywords := c.PostForm("keywords")
+	description := c.PostForm("description")
+	sortId, _ := strconv.Atoi(c.PostForm("sort_id"))
+	titlePic := c.PostForm("title_pic")
+	flag := c.PostForm("flag")
+	if title == "" || content == "" || sortId == 0 {
+		a.ReturnFail(c, util.PublicParamsIllegal, nil)
+		return
+	}
+
 	data, err := a.ArticleService.AddArticle(&model.Article{
-		Title:   title,
-		Content: content,
-		Status:  status,
+		Title:       title,
+		Content:     content,
+		Status:      status,
+		Keywords:    keywords,
+		Description: description,
+		SortID:      sortId,
+		TitlePic:    titlePic,
+		Flag:        flag,
 	})
 	if err != nil {
 		a.ReturnFail(c, util.PublicError, nil)
@@ -70,10 +85,26 @@ func (a *ArticleController) UpdateArticle(c *gin.Context) {
 	title := c.PostForm("title")
 	content := c.PostForm("content")
 	status, _ := strconv.Atoi(c.PostForm("status"))
+	keywords := c.PostForm("keywords")
+	description := c.PostForm("description")
+	sortId, _ := strconv.Atoi(c.PostForm("sort_id"))
+	titlePic := c.PostForm("title_pic")
+	flag := c.PostForm("flag")
+	isDelete, _ := strconv.Atoi(c.PostForm("is_delete"))
+	if title == "" || content == "" || sortId == 0 {
+		a.ReturnFail(c, util.PublicParamsIllegal, nil)
+		return
+	}
 	data, err := a.ArticleService.UpdateArticle(id, &model.Article{
-		Title:   title,
-		Content: content,
-		Status:  status,
+		Title:       title,
+		Content:     content,
+		Status:      status,
+		Keywords:    keywords,
+		Description: description,
+		SortID:      sortId,
+		TitlePic:    titlePic,
+		Flag:        flag,
+		IsDelete:    isDelete,
 	})
 	if err != nil {
 		a.ReturnFail(c, util.PublicError, nil)
