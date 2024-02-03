@@ -134,7 +134,18 @@ func (c *CategoryController) GetTree(ctx *gin.Context) {
 		c.ReturnFail(ctx, util.PublicError, nil)
 		return
 	}
+	var newNode []*util.Node
+	for _, v := range data {
+		n := &util.Node{
+			Id:       v.ID,
+			Name:     v.SortName,
+			ParentId: v.ParentID,
+			Children: make([]*util.Node, 0),
+		}
+		newNode = append(newNode, n)
+	}
 	//调用util中的GetTree方法
-	c.ReturnSuccess(ctx, util.PublicSuccess, data)
+	res := util.GetTree(newNode, 0)
+	c.ReturnSuccess(ctx, util.PublicSuccess, res)
 
 }
