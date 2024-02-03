@@ -103,12 +103,12 @@ func DeleteCategory(id int) error {
 }
 
 // 获取所有栏目
-func GetAllCategory(query CategoryQuery) (*Category, error) {
+func GetAllCategory(query CategoryQuery) ([]*Category, error) {
 	dbQuery := buildCategoryQuery(DB.Model(&Category{}), query)
-	var category Category
-	err := dbQuery.Where("is_delete = ?", 0).Find(&category).Error
+	var categories []*Category
+	err := dbQuery.Find(&categories).Error
 	if err != nil {
 		return nil, err
 	}
-	return &category, nil
+	return categories, nil
 }

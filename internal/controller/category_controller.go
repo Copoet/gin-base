@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"gin-base/internal/model"
 	services "gin-base/internal/service"
 	"gin-base/pkg/util"
@@ -131,13 +130,11 @@ func (c *CategoryController) DeleteCategory(ctx *gin.Context) {
 // @Router /categories/tree [get]
 func (c *CategoryController) GetTree(ctx *gin.Context) {
 	data, err := c.CategoryService.GetAllCategory()
-	fmt.Printf("data: %v,%T", data, data)
-	//var list util.Node
-	//list = util.GetTree(data, 0)
-
 	if err != nil {
 		c.ReturnFail(ctx, util.PublicError, nil)
 		return
 	}
+	//调用util中的GetTree方法
 	c.ReturnSuccess(ctx, util.PublicSuccess, data)
+
 }
