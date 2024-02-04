@@ -19,7 +19,7 @@ type CategoryController struct {
 // @Param keyword query string false "keyword"
 // @Param page query int false "page"
 // @Param page_size query int false "page_size"
-// @Router /categories/list [get]
+// @Router /category/list [get]
 func (c *CategoryController) GetList(ctx *gin.Context) {
 
 	page, _ := strconv.Atoi(ctx.DefaultQuery("page", "1"))
@@ -39,7 +39,7 @@ func (c *CategoryController) GetList(ctx *gin.Context) {
 // @Accept  x-www-form-urlencoded
 // @Produce  json
 // @Param   id   path    int     true        "Category ID"
-// @Router /categories/info [get]
+// @Router /category/info [get]
 func (c *CategoryController) GetCategoryInfo(ctx *gin.Context) {
 	id, _ := strconv.Atoi(ctx.Param("id"))
 	var query model.CategoryQuery
@@ -57,7 +57,7 @@ func (c *CategoryController) GetCategoryInfo(ctx *gin.Context) {
 // @Produce  json
 // @Param   name  formData  string  true  "分类名称"
 // @Param   status formData  int  true  "状态" value 1 启用 0 禁用
-// @Router /categories/add [post]
+// @Router /category/add [post]
 func (c *CategoryController) AddCategory(ctx *gin.Context) {
 
 	name := ctx.PostForm("name")
@@ -85,7 +85,7 @@ func (c *CategoryController) AddCategory(ctx *gin.Context) {
 // @Param   id   formData  int  true  "分类ID"
 // @Param   name  formData  string  true  "分类名称"
 // @Param   status formData  int  true  "状态" value 1 启用 0 禁用
-// @Router /categories/update [put]
+// @Router /category/update [put]
 func (c *CategoryController) UpdateCategory(ctx *gin.Context) {
 
 	id, _ := strconv.Atoi(ctx.PostForm("id"))
@@ -112,7 +112,7 @@ func (c *CategoryController) UpdateCategory(ctx *gin.Context) {
 // @Accept  x-www-form-urlencoded
 // @Produce  json
 // @Param   id   formData  int  true  "分类ID"
-// @Router /categories/delete [delete]
+// @Router /category/delete [delete]
 func (c *CategoryController) DeleteCategory(ctx *gin.Context) {
 	id, _ := strconv.Atoi(ctx.PostForm("id"))
 	err := c.CategoryService.DeleteCategory(id)
@@ -127,7 +127,7 @@ func (c *CategoryController) DeleteCategory(ctx *gin.Context) {
 // @Tags Category
 // @Accept  x-www-form-urlencoded
 // @Produce  json
-// @Router /categories/tree [get]
+// @Router /category/tree [get]
 func (c *CategoryController) GetTree(ctx *gin.Context) {
 	data, err := c.CategoryService.GetAllCategory()
 	if err != nil {

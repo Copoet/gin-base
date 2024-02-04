@@ -141,7 +141,7 @@ paths:
       summary: 退出登陆
       tags:
       - Auth
-  /categories/add:
+  /category/add:
     post:
       consumes:
       - application/x-www-form-urlencoded
@@ -162,7 +162,7 @@ paths:
       summary: 添加分类
       tags:
       - Category
-  /categories/delete:
+  /category/delete:
     delete:
       consumes:
       - application/x-www-form-urlencoded
@@ -178,7 +178,7 @@ paths:
       summary: 删除分类
       tags:
       - Category
-  /categories/info:
+  /category/info:
     get:
       consumes:
       - application/x-www-form-urlencoded
@@ -194,7 +194,7 @@ paths:
       summary: 分类详情
       tags:
       - Category
-  /categories/list:
+  /category/list:
     get:
       parameters:
       - description: keyword
@@ -215,7 +215,17 @@ paths:
       summary: 分类列表
       tags:
       - Category
-  /categories/update:
+  /category/tree:
+    get:
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      responses: {}
+      summary: 获取栏目树形分类
+      tags:
+      - Category
+  /category/update:
     put:
       consumes:
       - application/x-www-form-urlencoded

@@ -218,7 +218,7 @@ const docTemplate = `{
                 "responses": {}
             }
         },
-        "/categories/add": {
+        "/category/add": {
             "post": {
                 "consumes": [
                     "application/x-www-form-urlencoded"
@@ -249,7 +249,7 @@ const docTemplate = `{
                 "responses": {}
             }
         },
-        "/categories/delete": {
+        "/category/delete": {
             "delete": {
                 "consumes": [
                     "application/x-www-form-urlencoded"
@@ -273,7 +273,7 @@ const docTemplate = `{
                 "responses": {}
             }
         },
-        "/categories/info": {
+        "/category/info": {
             "get": {
                 "consumes": [
                     "application/x-www-form-urlencoded"
@@ -297,7 +297,7 @@ const docTemplate = `{
                 "responses": {}
             }
         },
-        "/categories/list": {
+        "/category/list": {
             "get": {
                 "produces": [
                     "application/json"
@@ -329,7 +329,22 @@ const docTemplate = `{
                 "responses": {}
             }
         },
-        "/categories/update": {
+        "/category/tree": {
+            "get": {
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Category"
+                ],
+                "summary": "获取栏目树形分类",
+                "responses": {}
+            }
+        },
+        "/category/update": {
             "put": {
                 "consumes": [
                     "application/x-www-form-urlencoded"
