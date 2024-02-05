@@ -64,3 +64,36 @@ func GetMenuList(query MenuQuery, page int, page_size int) (map[string]interface
 		"list":  menus,
 	}, nil
 }
+
+func GetMenuInfo(query MenuQuery) (menu *Menu, err error) {
+	dbQuery := buildMenuQuery(DB.Model(&Menu{}), query)
+	err = dbQuery.First(&menu).Error
+	if err != nil {
+		return nil, err
+	}
+	return menu, nil
+}
+
+func AddMenu(menu *Menu) (rid int, err error) {
+	result := DB.Model(&Menu{}).Create(menu)
+	if result.Error != nil {
+		return 0, result.Error
+	}
+	return rid, nil
+}
+
+func UpdateMenu(id int, menu *Menu) (rid int, err error) {
+	result := DB.Model(&Menu{}).Where("id = ?", id).Updates(menu)
+	if result.Error != nil {
+		return 0, result.Error
+	}
+	return rid, nil
+}
+
+func DeleteMenu(id int) (rid int, err error) {
+	result := DB.Model(&Menu{}).Where("id = ?", id).Delete(&Menu{})
+	if result.Error != nil {
+		return 0, result.Error
+	}
+	return rid, nil
+}
