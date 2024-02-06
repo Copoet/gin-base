@@ -4,23 +4,6 @@ import (
 	"gorm.io/gorm"
 )
 
-/*
-*
-CREATE TABLE `system` (
-
-	`id` mediumint NOT NULL AUTO_INCREMENT COMMENT 'id',
-	`sys_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '参数名称',
-	`sys_value` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci COMMENT '参数值',
-	`sys_explain` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '参数说明',
-	`sys_type` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '参数类型',
-	`create_time` datetime DEFAULT NULL COMMENT '添加时间',
-	`update_time` datetime DEFAULT NULL COMMENT '更新时间',
-	`status` tinyint(1) DEFAULT NULL COMMENT '状态 1 启用 2 禁用',
-	`is_delete` tinyint(1) DEFAULT '2' COMMENT '是否删除 1 是 2 否',
-	PRIMARY KEY (`id`) USING BTREE
-
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3 COMMENT='系统参数表';
-*/
 type System struct {
 	BaseModel
 	ID         int    `json:"id"`
