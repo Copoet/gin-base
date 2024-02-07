@@ -19,6 +19,7 @@ func (*Menu) TableName() string {
 }
 
 type MenuQuery struct {
+	ParentID int
 	ID       *int
 	ParentId *int
 	IsDelete *int

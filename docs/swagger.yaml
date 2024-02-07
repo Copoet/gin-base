@@ -345,6 +345,68 @@ paths:
       summary: 更新管理员
       tags:
       - Manage
+  /menu/add:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - description: name
+        in: query
+        name: name
+        required: true
+        type: string
+      - description: title
+        in: query
+        name: title
+        required: true
+        type: string
+      - description: pid
+        in: query
+        name: pid
+        required: true
+        type: integer
+      - description: icon
+        in: query
+        name: icon
+        required: true
+        type: string
+      - description: path
+        in: query
+        name: path
+        required: true
+        type: string
+      - description: status
+        in: query
+        name: status
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: 添加菜单
+      tags:
+      - Menu
+  /menu/list:
+    get:
+      parameters:
+      - description: name
+        in: query
+        name: name
+        type: string
+      - description: page
+        in: query
+        name: page
+        type: integer
+      - description: page_size
+        in: query
+        name: page_size
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: 菜单列表
+      tags:
+      - Menu
   /users/list:
     get:
       parameters:
