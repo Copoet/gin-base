@@ -95,5 +95,5 @@ func DeleteMenu(id int) (rid int, err error) {
 	if result.Error != nil {
 		return 0, result.Error
 	}
-	return rid, nil
+	return 0, nil
 }
