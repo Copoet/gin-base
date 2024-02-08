@@ -386,6 +386,14 @@ paths:
       summary: 添加菜单
       tags:
       - Menu
+  /menu/delete:
+    delete:
+      consumes:
+      - application/x-www-form-urlencoded
+      responses: {}
+      summary: 删除菜单
+      tags:
+      - Menu
   /menu/list:
     get:
       parameters:
@@ -405,6 +413,20 @@ paths:
       - application/json
       responses: {}
       summary: 菜单列表
+      tags:
+      - Menu
+  /menu/tree:
+    get:
+      responses: {}
+      summary: 获取菜单树
+      tags:
+      - Menu
+  /menu/update:
+    put:
+      consumes:
+      - application/x-www-form-urlencoded
+      responses: {}
+      summary: 更新菜单
       tags:
       - Menu
   /users/list:

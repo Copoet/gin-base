@@ -580,6 +580,18 @@ const docTemplate = `{
                 "responses": {}
             }
         },
+        "/menu/delete": {
+            "delete": {
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "tags": [
+                    "Menu"
+                ],
+                "summary": "删除菜单",
+                "responses": {}
+            }
+        },
         "/menu/list": {
             "get": {
                 "produces": [
@@ -609,6 +621,27 @@ const docTemplate = `{
                         "in": "query"
                     }
                 ],
+                "responses": {}
+            }
+        },
+        "/menu/tree": {
+            "get": {
+                "tags": [
+                    "Menu"
+                ],
+                "summary": "获取菜单树",
+                "responses": {}
+            }
+        },
+        "/menu/update": {
+            "put": {
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "tags": [
+                    "Menu"
+                ],
+                "summary": "更新菜单",
                 "responses": {}
             }
         },
