@@ -12,6 +12,8 @@ func SetupRouter(router *gin.Engine) {
 	authController := new(controllers.AuthController)
 	articleController := new(controllers.ArticleController)
 	categoryController := new(controllers.CategoryController)
+	menuController := new(controllers.MenuController)
+	systemController := new(controllers.SystemController)
 	//测试中间价
 	router.Use(middleware.LoggerMiddleware())
 	// login & logout
@@ -50,5 +52,20 @@ func SetupRouter(router *gin.Engine) {
 		category.PUT("/update/:id", categoryController.UpdateCategory)
 		category.DELETE("/delete/:id", categoryController.DeleteCategory)
 		category.GET("/tree", categoryController.GetTree)
+	}
+
+	//菜单
+	menu := router.Group("/menu")
+	{
+		menu.GET("/list", menuController.GetList)
+		menu.POST("/add", menuController.AddMenu)
+		menu.PUT("/update/:id", menuController.UpdateMenu)
+		menu.DELETE("/delete/:id", menuController.DeleteMenu)
+		menu.GET("/tree", menuController.GetTree)
+	}
+	//系统参数
+	system := router.Group("/system")
+	{
+		system.GET("/list", systemController.GetSystemList)
 	}
 }

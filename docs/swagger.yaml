@@ -429,6 +429,27 @@ paths:
       summary: 更新菜单
       tags:
       - Menu
+  /system/list:
+    get:
+      parameters:
+      - description: sys_name
+        in: query
+        name: sys_name
+        type: string
+      - description: page
+        in: query
+        name: page
+        type: integer
+      - description: page_size
+        in: query
+        name: page_size
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: 获取系统配置列表
+      tags:
+      - System
   /users/list:
     get:
       parameters:
