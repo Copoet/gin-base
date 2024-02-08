@@ -51,3 +51,10 @@ func (s *MenuService) DeleteMenu(id int) (rid int, err error) {
 	}
 	return rid, nil
 }
+
+// 获取所有菜单
+func (s *MenuService) GetAllMenu() ([]*model.Menu, error) {
+
+	data, err := model.GetAllMenu()
+	return data, err
+}

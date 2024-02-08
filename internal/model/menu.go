@@ -98,3 +98,13 @@ func DeleteMenu(id int) (rid int, err error) {
 	}
 	return 0, nil
 }
+
+// 获取所有菜单
+func GetAllMenu() ([]*Menu, error) {
+	var menus []*Menu
+	err := DB.Model(&Menu{}).Find(&menus).Error
+	if err != nil {
+		return nil, err
+	}
+	return menus, nil
+}
