@@ -68,5 +68,7 @@ func SetupRouter(router *gin.Engine) {
 	{
 		system.GET("/list", systemController.GetSystemList)
 		system.POST("/add", systemController.AddSystem)
+		system.PUT("/update/:id", systemController.UpdateSystem)
+		system.DELETE("/delete/:id", systemController.DeleteSystem)
 	}
 }
