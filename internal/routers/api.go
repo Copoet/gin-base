@@ -67,5 +67,6 @@ func SetupRouter(router *gin.Engine) {
 	system := router.Group("/system")
 	{
 		system.GET("/list", systemController.GetSystemList)
+		system.POST("/add", systemController.AddSystem)
 	}
 }

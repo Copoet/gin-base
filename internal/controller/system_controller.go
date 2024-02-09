@@ -33,3 +33,34 @@ func (s *SystemController) GetSystemList(c *gin.Context) {
 	}
 	s.ReturnSuccess(c, util.PublicSuccess, data)
 }
+
+// @Summary 添加系统配置
+// @Tags System
+// @Produce  json
+// @Param sys_name formData string true "sys_name"
+// @Param sys_value formData string true "sys_value"
+// @Param sys_type formData string true "sys_type"
+// @Router /system/add [post]
+func (s *SystemController) AddSystem(c *gin.Context) {
+	sysName := c.PostForm("sys_name")
+	sysValue := c.PostForm("sys_value")
+	sysType := c.PostForm("sys_type")
+	if sysName == "" || sysValue == "" || sysType == "" {
+		s.ReturnFail(c, util.PublicError, nil)
+		return
+	}
+	system := &model.System{
+		SysName:    sysName,
+		SysValue:   sysValue,
+		SysExplain: sysName,
+		SysType:    sysType,
+		IsDelete:   0,
+		Status:     1,
+	}
+	if _, err := s.SystemService.AddSystem(system); err != nil {
+		s.ReturnFail(c, util.PublicError, err)
+		return
+	}
+	s.ReturnSuccess(c, util.PublicSuccess, nil)
+
+}

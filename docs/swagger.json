@@ -637,6 +637,41 @@
                 "responses": {}
             }
         },
+        "/system/add": {
+            "post": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "System"
+                ],
+                "summary": "添加系统配置",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "sys_name",
+                        "name": "sys_name",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "sys_value",
+                        "name": "sys_value",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "sys_type",
+                        "name": "sys_type",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
         "/system/list": {
             "get": {
                 "produces": [

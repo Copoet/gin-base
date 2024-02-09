@@ -429,6 +429,30 @@ paths:
       summary: 更新菜单
       tags:
       - Menu
+  /system/add:
+    post:
+      parameters:
+      - description: sys_name
+        in: formData
+        name: sys_name
+        required: true
+        type: string
+      - description: sys_value
+        in: formData
+        name: sys_value
+        required: true
+        type: string
+      - description: sys_type
+        in: formData
+        name: sys_type
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: 添加系统配置
+      tags:
+      - System
   /system/list:
     get:
       parameters:
