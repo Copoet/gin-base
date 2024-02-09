@@ -680,6 +680,27 @@ const docTemplate = `{
                 "responses": {}
             }
         },
+        "/system/delete": {
+            "delete": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "System"
+                ],
+                "summary": "删除系统配置",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
         "/system/list": {
             "get": {
                 "produces": [
@@ -707,6 +728,48 @@ const docTemplate = `{
                         "description": "page_size",
                         "name": "page_size",
                         "in": "query"
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/system/update": {
+            "put": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "System"
+                ],
+                "summary": "更新系统配置",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "sys_name",
+                        "name": "sys_name",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "sys_value",
+                        "name": "sys_value",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "sys_type",
+                        "name": "sys_type",
+                        "in": "formData",
+                        "required": true
                     }
                 ],
                 "responses": {}

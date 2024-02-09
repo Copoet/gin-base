@@ -453,6 +453,20 @@ paths:
       summary: 添加系统配置
       tags:
       - System
+  /system/delete:
+    delete:
+      parameters:
+      - description: id
+        in: formData
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: 删除系统配置
+      tags:
+      - System
   /system/list:
     get:
       parameters:
@@ -472,6 +486,35 @@ paths:
       - application/json
       responses: {}
       summary: 获取系统配置列表
+      tags:
+      - System
+  /system/update:
+    put:
+      parameters:
+      - description: id
+        in: formData
+        name: id
+        required: true
+        type: integer
+      - description: sys_name
+        in: formData
+        name: sys_name
+        required: true
+        type: string
+      - description: sys_value
+        in: formData
+        name: sys_value
+        required: true
+        type: string
+      - description: sys_type
+        in: formData
+        name: sys_type
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: 更新系统配置
       tags:
       - System
   /users/list:
