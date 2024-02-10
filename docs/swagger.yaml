@@ -429,6 +429,27 @@ paths:
       summary: 更新菜单
       tags:
       - Menu
+  /navigation/list:
+    get:
+      parameters:
+      - description: name
+        in: query
+        name: name
+        type: string
+      - description: page
+        in: query
+        name: page
+        type: integer
+      - description: page_size
+        in: query
+        name: page_size
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: 获取导航列表
+      tags:
+      - Navigation
   /system/add:
     post:
       parameters:
