@@ -68,6 +68,15 @@ func GetNavigationList(query NavigationQuery, page int, page_size int) (map[stri
 	}, nil
 }
 
+func GetNavigationInfo(query NavigationQuery) (*Navigation, error) {
+	dbQuery := buildNavigationQuery(DB.Model(&Navigation{}), query)
+	var result Navigation
+	err := dbQuery.First(&result).Error
+	if err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
 func AddNavigation(navigation *Navigation) (rid int, err error) {
 	result := DB.Model(&Navigation{}).Create(navigation)
 	if result.Error != nil {
