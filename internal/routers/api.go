@@ -76,6 +76,7 @@ func SetupRouter(router *gin.Engine) {
 	nav := router.Group("/nav")
 	{
 		nav.GET("/list", navigationController.GetList)
+		nav.POST("/add", navigationController.AddNavigation)
 
 	}
 }

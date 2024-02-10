@@ -429,6 +429,37 @@ paths:
       summary: 更新菜单
       tags:
       - Menu
+  /nav/add:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - description: name
+        in: query
+        name: name
+        required: true
+        type: string
+      - description: parentId
+        in: query
+        name: parentId
+        required: true
+        type: string
+      - description: url
+        in: query
+        name: url
+        required: true
+        type: string
+      - description: status
+        in: query
+        name: status
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: 添加导航
+      tags:
+      - Navigation
   /nav/list:
     get:
       parameters:

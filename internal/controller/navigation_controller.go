@@ -38,3 +38,32 @@ func (n *NavigationController) GetList(c *gin.Context) {
 	}
 	n.ReturnSuccess(c, util.PublicSuccess, data)
 }
+
+// @Summary 添加导航
+// @Tags Navigation
+// @Accept  x-www-form-urlencoded
+// @Produce  json
+// @Param   name   query    string     true        "name"
+// @Param   parentId   query    string     true        "parentId"
+// @Param   url   query    string     true        "url"
+// @Param   status   query    int     true        "status"
+// @Router /nav/add [post]
+func (n *NavigationController) AddNavigation(c *gin.Context) {
+	name := c.PostForm("name")
+	if name == "" {
+		n.ReturnFail(c, util.PublicParamsNull, nil)
+	}
+	parentId, _ := strconv.Atoi(c.PostForm("parent_id"))
+	url := c.PostForm("url")
+	status, _ := strconv.Atoi(c.PostForm("status"))
+	data, err := n.NavigationService.AddNavigation(&model.Navigation{
+		Name:     name,
+		Status:   status,
+		Url:      url,
+		ParentId: parentId,
+	})
+	if err != nil {
+		n.ReturnFail(c, util.PublicError, err)
+	}
+	n.ReturnSuccess(c, util.PublicSuccess, data)
+}
