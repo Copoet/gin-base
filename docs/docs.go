@@ -645,7 +645,7 @@ const docTemplate = `{
                 "responses": {}
             }
         },
-        "/navigation/list": {
+        "/nav/list": {
             "get": {
                 "produces": [
                     "application/json"

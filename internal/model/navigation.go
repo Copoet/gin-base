@@ -53,7 +53,7 @@ func buildNavigationQuery(db *gorm.DB, query NavigationQuery) *gorm.DB {
 func GetNavigationList(query NavigationQuery, page int, page_size int) (map[string]interface{}, error) {
 	dbQuery := buildNavigationQuery(DB.Model(&Navigation{}), query)
 	var total int64
-	result := make([]Navigation, 0)
+	var result []*Navigation
 	err := dbQuery.Count(&total).Error
 	if err != nil {
 		return nil, err

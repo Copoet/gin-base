@@ -19,10 +19,10 @@ type NavigationController struct {
 // @Param name query string false "name"
 // @Param page query int false "page"
 // @Param page_size query int false "page_size"
-// @Router /navigation/list [get]
+// @Router /nav/list [get]
 func (n *NavigationController) GetList(c *gin.Context) {
-	page, _ := strconv.Atoi(c.Query("page"))
-	pageSize, _ := strconv.Atoi(c.Query("page_size"))
+	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))
+	pageSize, _ := strconv.Atoi(c.DefaultQuery("page_size", "20"))
 	name := c.Query("name")
 	status, _ := strconv.Atoi(c.Query("status"))
 	var query model.NavigationQuery

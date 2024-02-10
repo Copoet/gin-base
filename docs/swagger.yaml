@@ -429,7 +429,7 @@ paths:
       summary: 更新菜单
       tags:
       - Menu
-  /navigation/list:
+  /nav/list:
     get:
       parameters:
       - description: name
