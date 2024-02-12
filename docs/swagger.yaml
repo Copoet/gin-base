@@ -460,6 +460,22 @@ paths:
       summary: 添加导航
       tags:
       - Navigation
+  /nav/delete:
+    delete:
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - description: ID
+        in: formData
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: 删除导航
+      tags:
+      - Navigation
   /nav/list:
     get:
       parameters:

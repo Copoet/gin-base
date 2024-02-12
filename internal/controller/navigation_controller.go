@@ -94,3 +94,22 @@ func (n *NavigationController) UpdateNavigation(c *gin.Context) {
 	}
 	n.ReturnSuccess(c, util.PublicSuccess, data)
 }
+
+// @Summary 删除导航
+// @Tags Navigation
+// @Accept  x-www-form-urlencoded
+// @Param   id   formData  int  true  "ID"
+// @Produce  json
+// @Router /nav/delete [delete]
+func (n *NavigationController) DeleteNavigation(c *gin.Context) {
+	id, _ := strconv.Atoi(c.PostForm("id"))
+	if id == 0 {
+		n.ReturnFail(c, util.PublicParamsNull, nil)
+	}
+	data, err := n.NavigationService.DeleteNavigation(id)
+	if err != nil {
+		n.ReturnFail(c, util.PublicError, err)
+	}
+	n.ReturnSuccess(c, util.PublicSuccess, data)
+
+}
