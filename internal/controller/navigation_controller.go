@@ -67,3 +67,30 @@ func (n *NavigationController) AddNavigation(c *gin.Context) {
 	}
 	n.ReturnSuccess(c, util.PublicSuccess, data)
 }
+
+// @Summary 更新导航
+// @Tags Navigation
+// @Accept  x-www-form-urlencoded
+// @Produce  json
+// @Param   name   query    string     true        "name"
+// @Param   parentId   query    string     true        "parentId"
+// @Param   url   query    string     true        "url"
+// @Param   status   query    int     true        "status"
+// @Router /nav/update [post]
+func (n *NavigationController) UpdateNavigation(c *gin.Context) {
+	id, _ := strconv.Atoi(c.PostForm("id"))
+	name := c.PostForm("name")
+	parentId, _ := strconv.Atoi(c.PostForm("parent_id"))
+	url := c.PostForm("url")
+	status, _ := strconv.Atoi(c.PostForm("status"))
+	data, err := n.NavigationService.UpdateNavigation(id, &model.Navigation{
+		Name:     name,
+		ParentId: parentId,
+		Url:      url,
+		Status:   status,
+	})
+	if err != nil {
+		n.ReturnFail(c, util.PublicError, err)
+	}
+	n.ReturnSuccess(c, util.PublicSuccess, data)
+}

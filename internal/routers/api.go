@@ -77,6 +77,7 @@ func SetupRouter(router *gin.Engine) {
 	{
 		nav.GET("/list", navigationController.GetList)
 		nav.POST("/add", navigationController.AddNavigation)
+		nav.PUT("/update/:id", navigationController.UpdateNavigation)
 
 	}
 }

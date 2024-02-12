@@ -481,6 +481,37 @@ paths:
       summary: 获取导航列表
       tags:
       - Navigation
+  /nav/update:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - description: name
+        in: query
+        name: name
+        required: true
+        type: string
+      - description: parentId
+        in: query
+        name: parentId
+        required: true
+        type: string
+      - description: url
+        in: query
+        name: url
+        required: true
+        type: string
+      - description: status
+        in: query
+        name: status
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: 更新导航
+      tags:
+      - Navigation
   /system/add:
     post:
       parameters:
