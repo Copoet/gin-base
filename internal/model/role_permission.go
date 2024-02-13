@@ -12,7 +12,7 @@ type RolePermission struct {
 }
 
 func (RolePermission) TableName() string {
-	return "role_permission"
+	return "auth_role_permission"
 }
 
 type QueryRolePermission struct {
