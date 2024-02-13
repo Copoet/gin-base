@@ -11,6 +11,10 @@ type RolePermission struct {
 	Status       int `json:"status"`
 }
 
+func (RolePermission) TableName() string {
+	return "role_permission"
+}
+
 type QueryRolePermission struct {
 	RoleID       *int
 	PermissionID *int
