@@ -41,3 +41,29 @@ func buildManagerRoleQuery(db *gorm.DB, query *QueryManagerRole) *gorm.DB {
 	}
 	return db
 }
+
+func GetManagerRoleList(query *QueryManagerRole) ([]*ManagerRole, error) {
+	db := DB.Model(&ManagerRole{})
+	db = buildManagerRoleQuery(db, query)
+	var list []*ManagerRole
+	err := db.Find(&list).Error
+	return list, err
+}
+
+func AddManagerRole(managerRole *ManagerRole) (id int, err error) {
+	err = DB.Create(managerRole).Error
+	return managerRole.ID, err
+}
+
+func UpdateMangerRole(managerRole *ManagerRole) (id int, err error) {
+	err = DB.Updates(managerRole).Error
+	return managerRole.ID, err
+}
+
+func DeleteManagerRole(id int) (rid int, err error) {
+	result := DB.Model(&ManagerRole{}).Where("id = ?", id).Delete(&ManagerRole{})
+	if result.Error != nil {
+		return 0, result.Error
+	}
+	return rid, nil
+}
