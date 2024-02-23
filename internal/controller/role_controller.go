@@ -30,3 +30,19 @@ func (rc *RoleController) GetList(c *gin.Context) {
 	}
 	rc.ReturnSuccess(c, util.PublicSuccess, data)
 }
+
+// @Summary 获取单个角色信息
+// @Tags Role
+// @Produce  json
+// @Param id path int true "id"
+// @Router /role/info/{id} [get]
+func (rc *RoleController) GetRoleInfo(c *gin.Context) {
+	id, _ := strconv.Atoi(c.Param("id"))
+	data, err := rc.RoleService.GetRoleInfo(
+		model.QueryRole{ID: &id})
+	if err != nil {
+		rc.ReturnFail(c, util.PublicError, err)
+	}
+	rc.ReturnSuccess(c, util.PublicSuccess, data)
+
+}

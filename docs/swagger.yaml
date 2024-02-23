@@ -528,6 +528,20 @@ paths:
       summary: 更新导航
       tags:
       - Navigation
+  /role/info/{id}:
+    get:
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: 获取单个角色信息
+      tags:
+      - Role
   /role/list:
     get:
       parameters:

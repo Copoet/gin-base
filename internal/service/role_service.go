@@ -10,3 +10,9 @@ func (r *RoleService) GetRoleList(query model.QueryRole, page int, pageSize int)
 	data, err := model.GetRoleList(query, page, pageSize)
 	return data, err
 }
+
+// 获取单条信息
+func (r *RoleService) GetRoleInfo(query model.QueryRole) (*model.Role, error) {
+	data, err := model.GetRoleOne(query)
+	return data, err
+}

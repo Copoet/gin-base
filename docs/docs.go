@@ -791,6 +791,27 @@ const docTemplate = `{
                 "responses": {}
             }
         },
+        "/role/info/{id}": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Role"
+                ],
+                "summary": "获取单个角色信息",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
         "/role/list": {
             "get": {
                 "produces": [

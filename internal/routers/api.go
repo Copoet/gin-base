@@ -85,5 +85,6 @@ func SetupRouter(router *gin.Engine) {
 	role := router.Group("/role")
 	{
 		role.GET("/list", roleController.GetList)
+		role.GET("/info/:id", roleController.GetRoleInfo)
 	}
 }
