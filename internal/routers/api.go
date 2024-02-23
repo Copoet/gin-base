@@ -15,6 +15,7 @@ func SetupRouter(router *gin.Engine) {
 	menuController := new(controllers.MenuController)
 	systemController := new(controllers.SystemController)
 	navigationController := new(controllers.NavigationController)
+	roleController := new(controllers.RoleController)
 	//测试中间价
 	router.Use(middleware.LoggerMiddleware())
 	// login & logout
@@ -79,5 +80,10 @@ func SetupRouter(router *gin.Engine) {
 		nav.POST("/add", navigationController.AddNavigation)
 		nav.PUT("/update/:id", navigationController.UpdateNavigation)
 		nav.DELETE("/delete", navigationController.DeleteNavigation)
+	}
+	//角色配置
+	role := router.Group("/role")
+	{
+		role.GET("/list", roleController.GetList)
 	}
 }

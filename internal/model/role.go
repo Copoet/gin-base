@@ -34,13 +34,22 @@ func buildRoleQuery(db *gorm.DB, query QueryRole) *gorm.DB {
 	return db
 }
 
-func GetRoleList(query QueryRole) ([]*Role, error) {
-	var roles []*Role
-	err := DB.Where(buildRoleQuery(DB, query)).Find(&roles).Error
+func GetRoleList(query QueryRole, page int, page_size int) (map[string]interface{}, error) {
+	var result []*Role
+	var total int64
+	dbQuery := buildRoleQuery(DB.Model(&Role{}), query)
+	err := dbQuery.Count(&total).Error
 	if err != nil {
 		return nil, err
 	}
-	return roles, nil
+	err = dbQuery.Offset((page - 1) * page_size).Limit(page_size).Find(&result).Error
+	if err != nil {
+		return nil, err
+	}
+	return map[string]interface{}{
+		"total": total,
+		"list":  result,
+	}, nil
 }
 
 func GetRoleOne(query QueryRole) (*Role, error) {
