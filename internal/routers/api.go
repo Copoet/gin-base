@@ -86,5 +86,6 @@ func SetupRouter(router *gin.Engine) {
 	{
 		role.GET("/list", roleController.GetList)
 		role.GET("/info/:id", roleController.GetRoleInfo)
+		role.POST("/add", roleController.AddRole)
 	}
 }

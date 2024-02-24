@@ -69,8 +69,8 @@ func AddRole(role *Role) (id int, err error) {
 	return int(role.ID), nil
 }
 
-func UpdateRole(role *Role) error {
-	result := DB.Model(&Role{}).Where("id = ?", role.ID).Updates(role)
+func UpdateRole(id int, role *Role) error {
+	result := DB.Model(&Role{}).Where("id = ?", id).Updates(role)
 	return result.Error
 }
 
