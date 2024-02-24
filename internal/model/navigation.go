@@ -2,6 +2,7 @@ package model
 
 import (
 	"gorm.io/gorm"
+	"time"
 )
 
 type Navigation struct {
@@ -59,6 +60,20 @@ func GetNavigationList(query NavigationQuery, page int, page_size int) (map[stri
 		return nil, err
 	}
 	err = dbQuery.Offset((page - 1) * page_size).Limit(page_size).Find(&result).Error
+	//处理时间格式
+	for i := 0; i < len(result); i++ {
+		//处理create_time 字符串
+		createTimeStr, err := time.Parse(time.RFC3339, result[i].CreateTime)
+		if err != nil {
+			return nil, err
+		}
+		updateTimeStr, err := time.Parse(time.RFC3339, result[i].UpdateTime)
+		if err != nil {
+			return nil, err
+		}
+		result[i].CreateTime = createTimeStr.Format("2006-01-02 15:04:05")
+		result[i].UpdateTime = updateTimeStr.Format("2006-01-02 15:04:05")
+	}
 	if err != nil {
 		return nil, err
 	}
