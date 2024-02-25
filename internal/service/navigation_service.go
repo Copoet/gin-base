@@ -37,7 +37,9 @@ func (s *NavigationService) AddNavigation(data *model.Navigation) (id int, err e
 
 // 更新
 func (s *NavigationService) UpdateNavigation(id int, data *model.Navigation) (rid int, err error) {
-
+	if data.UpdateTime == "" {
+		data.UpdateTime = time.Now().Format("2006-01-02 15:04:05")
+	}
 	rid, err = model.UpdateNavigation(id, data)
 	if err != nil {
 		return 0, err

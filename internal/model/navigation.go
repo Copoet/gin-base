@@ -90,6 +90,18 @@ func GetNavigationInfo(query NavigationQuery) (*Navigation, error) {
 	if err != nil {
 		return nil, err
 	}
+	//处理create_time 字符串
+	createTimeStr, err := time.Parse(time.RFC3339, result.CreateTime)
+	if err != nil {
+		return nil, err
+	}
+	result.CreateTime = createTimeStr.Format("2006-01-02 15:04:05")
+	//处理update_time 字符串
+	updateTimeStr, err := time.Parse(time.RFC3339, result.UpdateTime)
+	if err != nil {
+		return nil, err
+	}
+	result.UpdateTime = updateTimeStr.Format("2006-01-02 15:04:05")
 	return &result, nil
 }
 func AddNavigation(navigation *Navigation) (rid int, err error) {
